@@ -29,11 +29,17 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
-  1. skor1 ve skor2 arasındaki fark nedir?
-  
+  1. skor1 ve skor2 arasındaki fark nedir? 
+  skor1'de iç içe iki fonksiyon verilmiş ve fonksiyonun dışında içeriden tanımlanan değeri tekrar atamış (başka bir zaman kullanmak için şuanlık saklamış)
+  skor2'de ise tek bir fonksiyon kullanılmış "let skor" global skope olarak girilmiş. skor'u istediğimiz yerden çağırabiliriz anlamına geliyor.
+  skor1 -> closure
+  skor2 -> skope
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
+  skor1'de closure kullanılmaktadır. çünkü bir üst fonksiyonda tanımlanan değişken değerini kaybetmeden fonksiyon dışında da istenilen zamanda 
+  kullanılmak için alınmış.
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+  bir değeri saklayıp daha sonra kullanmak istersek closure, bir değere istediğimiz zaman rahatça erişebilmek için skope kullanırız.
 */
 
 // skor1 kodları
@@ -64,9 +70,15 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+   let score = 0;
+   score = Math.round(Math.random()*40);
+   if ( 1 < score && 40 >= score ) {
+    return score;
+   }
+   
 }
+console.log(takimSkoru());
 
 
 
@@ -86,9 +98,25 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(ilkTakimSkoru, cegrekSayisi){
+
+  let evSahibi = 0;
+  let konukTakim = 0;
+
+  for ( let i=0; i<cegrekSayisi; i++ ) {
+    evSahibi += ilkTakimSkoru();
+    konukTakim += ilkTakimSkoru();
+  }
+  let yeniSkor = {
+    "Ev Sahibi : ": evSahibi,
+    "Konuk Takım :": konukTakim,
+  };
+
+  return (yeniSkor);
+  
 }
+
+console.log(macSonucu(takimSkoru, 4));
 
 
 
