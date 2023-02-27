@@ -71,7 +71,7 @@ Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyon
 */
 
 function takimSkoru(){
-   var skor = Math.floor(Math.random()*(16)+10);
+   let skor = Math.floor(Math.random()*(16)+10);
    return skor;
    
    }
@@ -186,11 +186,38 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi() {
+function skorTabelasi(mfour,mtwo,period) {
+  let topEvSa = 0;
+  let topKoTa = 0;
+  let yenidizi = [];
+
+  for (let i=1; i<=period; i++) {
+    const fonk = mfour(mtwo);
+    const evSahibiPeriodPuan = fonk.EvSahibi;
+    const konukTakimPeriodPuan = fonk.KonukTakim;
+
+    const ekran = `${i}. Periyot: Ev Sahibi ${evSahibiPeriodPuan} - Konuk Takım ${konukTakimPeriodPuan}`
+    yenidizi.push(ekran);
+
+    topEvSa += evSahibiPeriodPuan;
+    topKoTa += konukTakimPeriodPuan;
+
+    if ( i == period && topEvSa == topKoTa ) {
+      const uzatma1 = `1. Uzatma: Ev Sahibi ${evSahibiPeriodPuan} - Konuk Takım ${konukTakimPeriodPuan}`
+      yenidizi.push(uzatma1);
+
+      topEvSa = topEvSa + evSahibiPeriodPuan;
+      topKoTa = topKoTa + konukTakimPeriodPuan;
+    }
+  }
+
+  yenidizi.push(`Maç Sonucu: Ev Sahibi ${topEvSa} - Konuk Takım ${topKoTa}`);
+
+  return yenidizi;
 
  }
 
-
+console.log(skorTabelasi(periyotSkoru,takimSkoru,3));
 
 
 
