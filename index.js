@@ -71,14 +71,11 @@ Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyon
 */
 
 function takimSkoru(){
-   let score = 0;
-   score = Math.round(Math.random()*40);
-   if ( 1 < score && 40 >= score ) {
-    return score;
-   }
+   var skor = Math.floor(Math.random()*(16)+10);
+   return skor;
    
-}
-console.log(takimSkoru());
+   }
+
 
 
 
@@ -98,26 +95,28 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(ilkTakimSkoru, cegrekSayisi){
+function macSonucu(ilkTakimSkoru, ceyrekSayisi){
 
   let evSahibi = 0;
   let konukTakim = 0;
 
-  for ( let i=0; i<cegrekSayisi; i++ ) {
-    evSahibi += ilkTakimSkoru();
-    konukTakim += ilkTakimSkoru();
-  }
-  let yeniSkor = {
-    "Ev Sahibi : ": evSahibi,
-    "Konuk Takım :": konukTakim,
-  };
+  for ( let ceyrek = 1; ceyrek <= ceyrekSayisi; ceyrek++ ) {
 
-  return (yeniSkor);
-  
+    evSahibi += ilkTakimSkoru ();
+    konukTakim += ilkTakimSkoru ();
+  }
+  let finalSkor = {
+  "EvSahibi" : evSahibi,
+  "KonukTakim" : konukTakim
+};
+  let skor = {
+    EvSahibi: evSahibi,
+    KonukTakim: konukTakim
+  }
+  return finalSkor;
 }
 
-console.log(macSonucu(takimSkoru, 4));
-
+console.log(macSonucu(takimSkoru,4));
 
 
 
@@ -137,10 +136,23 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(newFunc) {
+  let evSahibipuan = 0;
+  let konukpuan = 0;
+  
+  evSahibipuan = newFunc();
+  konukpuan = newFunc();
+
+  let newObj = {
+    "EvSahibi": evSahibipuan,
+    "KonukTakim": konukpuan
+  };
+
+return (newObj);
 
 }
+console.log(periyotSkoru(takimSkoru));
+
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
@@ -174,9 +186,10 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-}
+function skorTabelasi() {
+
+ }
+
 
 
 
